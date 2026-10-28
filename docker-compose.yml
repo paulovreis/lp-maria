@@ -1,0 +1,11 @@
+services:
+  # No Easypanel: Domínios -> serviço "lp", porta 80 (HTTPS/Let's Encrypt fica por conta dele).
+  # Sem "ports" nem labels do Traefik: o proxy do Easypanel acessa o container
+  # direto pela rede interna Docker, sem sair para o IP público (sem hairpin).
+  lp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    expose:
+      - "80"
